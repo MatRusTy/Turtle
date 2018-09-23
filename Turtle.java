@@ -178,10 +178,9 @@ public class Turtle extends Actor {
      */
     public void squaresCornered(int n, double size)
     {
-        square(size * n);
-        
+        square(size);
         if(n != 0) {
-            squaresCornered(n-1, size);
+            squaresCornered(n-1, size * ((n-1.0)/n)); //den nye størrelse er en brøkdel mindre end den forrige
         }
     }
 
@@ -212,13 +211,12 @@ public class Turtle extends Actor {
      */ 
     public void squaresCentered(int n, double gap)
     {
-        square(gap*n);
+        square(gap*n + gap*(n-1));
         
-        jump(gap*0.5, gap*0.5);
+        jump(gap, gap);
         
-        n--;
         if(n != 0) {
-            squaresCentered(n, gap);
+            squaresCentered(n-1, gap);
         }
     }
 
@@ -279,8 +277,6 @@ public class Turtle extends Actor {
             turn(120);
             move(size);
             turn(120);
-            
-            
         }
         else {
             triangle(size);
