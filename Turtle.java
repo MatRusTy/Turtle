@@ -159,7 +159,15 @@ public class Turtle extends Actor {
      * @param size    Size of squares.
      * @param gap     Distance between adjacent squares.
      */
-    public void squaresHorizontal(int n, double size, double gap) {}
+    public void squaresHorizontal(int n, double size, double gap)
+    {
+        square(size);
+        jump(size + gap, 0);
+        n--;
+        if(n != 0) {
+            squaresHorizontal(n, size, gap);
+        }
+    }
 
     /**
      * Draws a number of squares inside each other so that
@@ -168,7 +176,14 @@ public class Turtle extends Actor {
      * @param n       Number of squares.
      * @param size    Size of largest square.
      */
-    public void squaresCornered(int n, double size) {}
+    public void squaresCornered(int n, double size)
+    {
+        square(size * n);
+        
+        if(n != 0) {
+            squaresCornered(n-1, size);
+        }
+    }
 
     /**
      * Draws a number of triangles inside each other.
@@ -176,7 +191,17 @@ public class Turtle extends Actor {
      * @param n       Number of triangles.
      * @param size    Size of largest triangle.
      */
-    public void triangles(int n, double size) {}
+    public void triangles(int n, double size)
+    {
+        triangle(size);
+        
+        move(size/2);
+        turn(60);
+        
+        if(n != 0) {
+            triangles(n-1, size/2);
+        }
+    }
 
     /**
      * Draws a number of squares inside each other.
@@ -184,8 +209,18 @@ public class Turtle extends Actor {
      * @param n      Number of squares.
      * @param gap    Gap between adjacent squares
      *               (equal to size of smallest square).
-     */
-    public void squaresCentered(int n, double gap) {}
+     */ 
+    public void squaresCentered(int n, double gap)
+    {
+        square(gap*n);
+        
+        jump(gap*0.5, gap*0.5);
+        
+        n--;
+        if(n != 0) {
+            squaresCentered(n, gap);
+        }
+    }
 
     /**
      * Draws a Koch curve.
@@ -193,7 +228,18 @@ public class Turtle extends Actor {
      * @param n       Degree of Koch curve.
      * @param size    Length of Koch curve.
      */
-    public void kochCurve(int n, double size) {}
+    public void kochCurve(int n, double size)
+    {
+        if (n >= 1){
+            kochCurve(n-1, 4); turn(-60);
+            kochCurve(n-1, 4); turn(120);
+            kochCurve(n-1, 4); turn(-60);
+            kochCurve(n-1, 4);
+        }
+        else {
+            move(size);
+        }
+    }
 
     /**
      * Draws a Koch flake.
@@ -201,7 +247,15 @@ public class Turtle extends Actor {
      * @param n       Degree of Koch curves.
      * @param size    Length of each Koch curve.
      */
-    public void kochFlake(int n, double size){}
+    public void kochFlake(int n, double size)
+    {
+        kochCurve(n, size);
+        turn(120);
+        kochCurve(n, size);
+        turn(120);
+        kochCurve(n, size);
+        turn(120);
+    }
 
     /**
      * Draws a Sierpinski curve.
@@ -209,7 +263,29 @@ public class Turtle extends Actor {
      * @param n       Degree of Sierpinski curve.
      * @param size    Length of Sierpinski curve.
      */
-    public void sierpinskiCurve(int n, double size) {}
+    public void sierpinskiCurve(int n, double size)
+    {
+        if(n >= 1) {
+            sierpinskiCurve(n-1, size/2);
+            move(size/2);
+            
+            sierpinskiCurve(n-1, size/2);
+            move(size/2);
+            turn(120);
+            move(size/2);
+            
+            sierpinskiCurve(n-1, size/2);
+            move(size/2);
+            turn(120);
+            move(size);
+            turn(120);
+            
+            
+        }
+        else {
+            triangle(size);
+        }
+    }
 
     /**
      * Draws a pattern of squares where most are placed in the diagonal.
