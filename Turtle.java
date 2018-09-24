@@ -12,6 +12,7 @@ public class Turtle extends Actor {
     public Turtle(int x, int y) {
         super(x, y, 0);
         addToCanvas();
+        
     }
 
     /**
