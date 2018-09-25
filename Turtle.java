@@ -161,10 +161,10 @@ public class Turtle extends Actor {
      */
     public void squaresHorizontal(int n, double size, double gap)
     {
-        square(size);
-        jump(size + gap, 0);
-        n--;
-        if(n != 0) {
+        if(n > 0) {
+            square(size);
+            jump(size + gap, 0);
+            n--;
             squaresHorizontal(n, size, gap);
         }
     }
@@ -178,8 +178,8 @@ public class Turtle extends Actor {
      */
     public void squaresCornered(int n, double size)
     {
-        square(size);
-        if(n != 0) {
+        if(n > 0) {
+            square(size);
             squaresCornered(n-1, size * ((n-1.0)/n)); //den nye størrelse er en brøkdel mindre end den forrige
         }
     }
@@ -192,12 +192,11 @@ public class Turtle extends Actor {
      */
     public void triangles(int n, double size)
     {
-        triangle(size);
-        
-        move(size/2);
-        turn(60);
-        
-        if(n != 0) {
+        if(n > 0) {
+            triangle(size);
+
+            move(size/2);
+            turn(60);
             triangles(n-1, size/2);
         }
     }
@@ -211,11 +210,10 @@ public class Turtle extends Actor {
      */ 
     public void squaresCentered(int n, double gap)
     {
-        square(gap*n + gap*(n-1));
-        
-        jump(gap, gap);
-        
-        if(n != 0) {
+        if(n > 0) {
+            square(gap*n + gap*(n-1));
+
+            jump(gap, gap);
             squaresCentered(n-1, gap);
         }
     }
@@ -266,12 +264,12 @@ public class Turtle extends Actor {
         if(n >= 1) {
             sierpinskiCurve(n-1, size/2);
             move(size/2);
-            
+
             sierpinskiCurve(n-1, size/2);
             move(size/2);
             turn(120);
             move(size/2);
-            
+
             sierpinskiCurve(n-1, size/2);
             move(size/2);
             turn(120);
